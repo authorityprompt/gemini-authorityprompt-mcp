@@ -1,9 +1,0 @@
-{
-  "servers": {
-    "authorityprompt": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["@authorityprompt/mcp"]
-    }
-  }
-}

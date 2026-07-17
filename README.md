@@ -1,12 +1,13 @@
 # AuthorityPrompt for Gemini CLI
 
-Verified company truth as MCP tools and resources — canonical facts, sources,
-provenance and confidence, published by the company itself through
-[AuthorityPrompt](https://authorityprompt.com).
-
 Companies have an official website for humans. They don't have an official
-identity for AI. AuthorityPrompt is that identity — this extension lets Gemini
-read it.
+identity for AI. [AuthorityPrompt](https://authorityprompt.com) is that identity
+— and this extension lets you manage **your own company's** identity from Gemini
+CLI.
+
+You sign in with your AuthorityPrompt account. Gemini then works with your
+company's data: verified facts, sources, AIO readiness, LLM visibility. Each
+account sees only its own companies.
 
 ## Install
 
@@ -14,58 +15,71 @@ read it.
 gemini extensions install https://github.com/authorityprompt/gemini-authorityprompt-mcp
 ```
 
-Then ask Gemini about any AuthorityPrompt-powered company:
+On first install Gemini CLI asks whether to trust the current workspace — answer
+`Y`. The first time a tool runs, your browser opens the AuthorityPrompt consent
+screen. After you approve, the token is managed by Gemini CLI; nothing is stored
+in this repository.
+
+You need an AuthorityPrompt account: https://authorityprompt.com
+
+## Use
+
+Ask in plain language:
 
 ```
-What verified facts does AuthorityPrompt have for authorityprompt.com?
+Which account am I connected as?
+List my companies.
+Run an AIO readiness audit.
+Add https://example.com/about as a source for my company.
+What do LLMs currently say about us, and where does it disagree with our facts?
 ```
 
-## Configuration
+## What it can do
 
-The extension reads **public** company profiles and needs no account. Optional
-settings (environment variables or CLI flags):
+Read your account and companies, pull the canonical profile, verified facts,
+sources with provenance and confidence, run AIO readiness audits and LLM
+visibility checks, and — with your consent — publish and repair company facts.
 
-| Setting | Env | Flag | Default |
-|---|---|---|---|
-| API base URL | `AUTHORITYPROMPT_API_URL` | `--api-url` | `https://authorityprompt.com` |
-| Default company domain | `AUTHORITYPROMPT_DEFAULT_DOMAIN` | `--domain` | `authorityprompt.com` |
-| Log level | `AUTHORITYPROMPT_LOG_LEVEL` | `--log-level` | `info` |
+Writes are explicit: the tools that change data are separate from the ones that
+read it, and the OAuth scopes you grant decide which are available.
 
-## Example prompts
+## Permissions
 
-1. "What verified facts does AuthorityPrompt have for acme.com?"
-2. "Check this claim about acme.com against their canonical record."
-3. "Show the sources and provenance behind acme.com's pricing facts."
-4. "How confident is acme.com's verified profile, and where are the gaps?"
-5. "Generate a recommended answer about acme.com using only verified facts."
+The extension requests only what it needs:
 
-## What it can and cannot do
+| Scope | Purpose |
+|---|---|
+| `profile:read` | identify the connected account |
+| `companies:read` | list your companies |
+| `company_profile:read` | read canonical profile, facts, sources |
+| `company_profile:write` | publish or repair facts, add sources |
+| `reports:read` | read audit and visibility reports |
+| `aio:run` | run AIO readiness audits |
+| `generators:run` | generate llms.txt, JSON-LD, answer blocks |
+| `visibility:check` | check what LLMs say about the company |
 
-- **Can:** read public verified facts, sources, provenance, confidence,
-  answer blocks and response contracts for any company published on
-  AuthorityPrompt.
-- **Cannot:** read private dashboard data or change anything. This extension is
-  strictly read-only over public data.
+Revoke access any time from your AuthorityPrompt account settings.
 
-For full account management (drafting fact updates, running AIO audits,
-generators, reports) use the remote connector — see
-<https://authorityprompt.com/integrations/gemini>.
+## How it works
+
+This extension is a thin manifest. It points Gemini CLI at the AuthorityPrompt
+MCP endpoint:
+
+```
+https://authorityprompt.com/api/v1/integrations/gemini/mcp
+```
+
+There is no local server and no dependencies to install. The endpoint requires
+OAuth 2.0; Gemini CLI discovers the authorization server from the `401`
+response, registers itself dynamically (RFC 7591) and runs the flow with PKCE.
 
 ## Links
 
-- Homepage: <https://authorityprompt.com>
-- Install guide: <https://authorityprompt.com/integrations/gemini>
-- Privacy policy: <https://authorityprompt.com/legal/privacy-policy>
-- Terms: <https://authorityprompt.com/legal/terms-conditions>
-- Support: hello@authorityprompt.com
+- Website: https://authorityprompt.com
+- Privacy: https://authorityprompt.com/privacy
+- Terms: https://authorityprompt.com/terms
+- Support: support@authorityprompt.com
 
-## Development
+## License
 
-```bash
-npm install
-npm run build      # emits dist/src/index.js referenced by gemini-extension.json
-npm test
-npm run typecheck
-```
-
-MIT © AuthorityPrompt
+MIT — see [LICENSE](LICENSE).

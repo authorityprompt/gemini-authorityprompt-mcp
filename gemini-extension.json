@@ -1,12 +1,10 @@
 {
   "name": "authorityprompt",
-  "version": "0.1.0",
-  "description": "Verified company truth for AI: canonical facts, sources, provenance and confidence from AuthorityPrompt.",
+  "version": "0.2.0",
+  "description": "Manage your company's official AI identity: verified facts, sources, AIO audits and LLM visibility from AuthorityPrompt. Sign in to work with your own company data.",
   "mcpServers": {
     "authorityprompt": {
-      "command": "node",
-      "args": ["${extensionPath}/dist/authorityprompt-gemini-mcp.js"],
-      "cwd": "${extensionPath}"
+      "httpUrl": "https://authorityprompt.com/api/v1/integrations/gemini/mcp"
     }
   }
 }
