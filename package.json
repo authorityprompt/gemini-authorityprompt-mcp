@@ -1,0 +1,51 @@
+{
+  "name": "@authorityprompt/gemini-mcp",
+  "version": "0.1.0",
+  "description": "Official MCP server for AuthorityPrompt verified company truth profiles.",
+  "type": "module",
+  "bin": {
+    "authorityprompt-gemini-mcp": "dist/src/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "examples",
+    "docs"
+  ],
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc && npm run bundle",
+    "bundle": "esbuild src/index.ts --bundle --platform=node --target=node20 --format=esm --outfile=dist/authorityprompt-gemini-mcp.js --banner:js=\"import{createRequire}from'module';const require=createRequire(import.meta.url);\"",
+    "start": "node dist/src/index.js",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "smoke": "tsx scripts/smoke-test.ts"
+  },
+  "keywords": [
+    "mcp",
+    "authorityprompt",
+    "ai",
+    "llm",
+    "agents",
+    "verified-company-data",
+    "canonical-profile"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "latest",
+    "dotenv": "latest",
+    "undici": "^6.22.0",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "esbuild": "^0.25.0",
+    "tsx": "latest",
+    "typescript": "latest",
+    "vitest": "^1.6.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"checkConflicts.js","sourceRoot":"","sources":["../../../src/tools/checkConflicts.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,cAAc,EAAE,MAAM,wBAAwB,CAAC;AACxD,MAAM,CAAC,KAAK,UAAU,cAAc,CAAC,MAA6B,EAAE,KAA8B;IAChG,MAAM,MAAM,GAAG,cAAc,CAAC,KAAK,CAAC,MAAM,CAAC,CAAC;IAC5C,OAAO,EAAE,MAAM,EAAE,GAAG,CAAC,MAAM,MAAM,CAAC,YAAY,CAAC,MAAM,CAAC,CAAC,EAAE,CAAC;AAC5D,CAAC"}

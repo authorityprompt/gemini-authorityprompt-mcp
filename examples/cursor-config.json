@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "authorityprompt": {
+      "command": "npx",
+      "args": ["@authorityprompt/mcp"]
+    }
+  }
+}

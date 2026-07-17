@@ -1,0 +1,11 @@
+node_modules
+.env
+.DS_Store
+coverage
+*.log
+
+# NOTE: dist/ is intentionally NOT ignored.
+# gemini-extension.json points the MCP server at dist/src/index.js, so the built
+# output must ship in the public repo — otherwise `gemini extensions install`
+# clones a repo with no entry point and the extension fails to start.
+# Run `npm run build` before committing.

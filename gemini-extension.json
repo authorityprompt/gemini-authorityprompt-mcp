@@ -1,0 +1,12 @@
+{
+  "name": "authorityprompt",
+  "version": "0.1.0",
+  "description": "Verified company truth for AI: canonical facts, sources, provenance and confidence from AuthorityPrompt.",
+  "mcpServers": {
+    "authorityprompt": {
+      "command": "node",
+      "args": ["${extensionPath}/dist/authorityprompt-gemini-mcp.js"],
+      "cwd": "${extensionPath}"
+    }
+  }
+}
